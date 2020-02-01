@@ -66,6 +66,14 @@ decorate <- function(distribution, decorators){
 
   else{
     lapply(decorators, function(a_decorator){
+      if(getR6Class(distribution) == "VectorDistribution") {
+        if(a_decorator$classname == "ExoticStatistics")
+          a_decorator = Vec_ExoticStatistics
+        else if(a_decorator$classname == "CoreStatistics")
+          a_decorator = Vec_CoreStatistics
+      }
+
+
       if(a_decorator$classname == "FunctionImputation"){
         if(!testUnivariate(distribution))
           stop("FunctionImputation is currently only supported for univariate distributions.")
