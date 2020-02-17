@@ -52,7 +52,7 @@ As `distr6` upgrades the `distr` family of packages, which has been available fo
 
 # Software Availability
 
-``distr6`` is available on GitHub and [CRAN](https://CRAN.R-project.org/package=distr6). It can either be installed from GitHub using the `devtools` [@packagedevtools] library or directly from CRAN with `install.packages`. The package uses the MIT open-source licence. Contributions, issues, feature requests, and general feedback can all be found and provided on the project [GitHub](https://github.com/alan-turing-institute/distr6). Full tutorials and further details are available on the [project website](https://alan-turing-institute.github.io/distr6/).
+``distr6`` is available on [GitHub](https://github.com/alan-turing-institute/distr6) and [CRAN](https://CRAN.R-project.org/package=distr6). It can either be installed from GitHub using the `devtools` [@packagedevtools] library or directly from CRAN with `install.packages`. The package uses the MIT open-source licence. Contributions, issues, feature requests, and general feedback can all be found and provided on the project [GitHub](https://github.com/alan-turing-institute/distr6). Full tutorials and further details are available on the [project website](https://alan-turing-institute.github.io/distr6/).
 
 # Acknowledgements
 We acknowledge contributions from the authors of ``distr``, Prof. Dr. Peter Ruckdeschel and Prof. Dr. Matthias Kohl, as well as a group of interns at UCL: Shen Chen, Jordan Deenichin, Chengyang Gao, Chloe Zhaoyuan Gu, Yunjie He, Xiaowen Huang, Shuhan Liu, Runlong Yu, Chijing Zeng and Qian Zhou.
