@@ -44,11 +44,11 @@ As `distr6` upgrades the `distr` family of packages, which has been available fo
 
 # Key Use-Cases
 
-1. Constructing and querying probability distributions
-2. Imputing numerical methods for custom user-build distributions
-3. Construction of composite distributions such as mixtures and product distributions
-4. A return-type in probabilsitic supervised learning, such as in `mlr3proba` [@packagemlr3proba]
-5. Visualising the shape of probability distributions using plots or comparing empirical distributions with qqplots
+1. **Constructing and querying probability distributions** - Currently 42 parameteric and non-parametric distributions can be constructed. Each can be queried for common representations, e.g. pdf, cdf, quantile, as well as simulating from the distribution. Additionally, mathematical methods are available, such as mean, variance, kurtosis, and skewness.
+2. **Imputing numerical methods for custom user-build distributions** - Users can construct their own probability distributions with `Distribution$new` decorators can then be used to impute numerical methods and functions. This is useful for understanding and learning properties of new distributions.
+3. **Construction of composite distributions** - Wrappers in `distr6` exist for mixture distributions, product distribution, vector distributons, as well as for truncating or huberizing distributions (and several more). Therefore distributions can be arbitrarily complex to serve any use-case.
+4. **Probabilsitic supervised learning** - `distr6` is used in the probabilistic machine learning package `mlr3proba` [@packagemlr3proba], which uses `distr6` in order to make supervised predictions of probability distributions.
+5. **Visualisation** - The `plot` function can be used to visualise the shape of the probability distributions, with a choice of one or multiple representations, including the density, distribution, quantile, survival, hazard, and cumulative hazard function. Additionally the `qqplot` function can compare empirical distributions to any distribution implemented in `distr6` .
 
 # Software Availability
 
