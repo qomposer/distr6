@@ -115,8 +115,8 @@ Logarithmic$set("public", "initialize", function(theta = 0.5, decorators = NULL,
   private$.parameters <- getParameterSet.Logarithmic(self, theta, verbose)
   self$setParameterValue(theta=theta)
 
-  pdf <- function(x1) extraDistr::dlgser(x1, self$getParameterValue("theta"))
-  cdf <- function(x1) extraDistr::plgser(x1, self$getParameterValue("theta"))
+  pdf <- function(x1, log = FALSE) extraDistr::dlgser(x1, self$getParameterValue("theta"), log = log)
+  cdf <- function(x1, log.p = FALSE) extraDistr::plgser(x1, self$getParameterValue("theta"), log.p = log.p)
   quantile <- function(p) extraDistr::qlgser(p, self$getParameterValue("theta"))
   rand <- function(n) extraDistr::rlgser(n, self$getParameterValue("theta"))
 

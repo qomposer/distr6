@@ -109,8 +109,8 @@ StudentT$set("public","initialize",function(df = 1, decorators = NULL, verbose =
   private$.parameters <- getParameterSet(self, df, verbose)
   self$setParameterValue(df = df)
 
-  pdf <- function(x1) dt(x1, self$getParameterValue("df"))
-  cdf <- function(x1) pt(x1, self$getParameterValue("df"))
+  pdf <- function(x1, log = FALSE) dt(x1, self$getParameterValue("df"), log = log)
+  cdf <- function(x1, log.p = FALSE) pt(x1, self$getParameterValue("df"), log.p = log.p)
   quantile <- function(p) qt(p, self$getParameterValue("df"))
   rand <- function(n) rt(n, self$getParameterValue("df"))
 

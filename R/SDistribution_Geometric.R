@@ -139,8 +139,8 @@ Geometric$set("public","initialize",function(prob = 0.5, qprob = NULL, trials = 
         support <- Naturals$new()
         description = "Geometric (Failures) Probability Distribution."
     } else {
-        pdf <- function(x1) dgeom(x1+1, self$getParameterValue("prob"))
-        cdf <- function(x1) pgeom(x1+1, self$getParameterValue("prob"))
+        pdf <- function(x1, log = FALSE) dgeom(x1+1, self$getParameterValue("prob"), log = log)
+        cdf <- function(x1, log.p = FALSE) pgeom(x1+1, self$getParameterValue("prob"), log.p = log.p)
         quantile <- function(p) qgeom(p, self$getParameterValue("prob"))+1
         rand <- function(n) rgeom(n, self$getParameterValue("prob"))
         support <- PosNaturals$new()

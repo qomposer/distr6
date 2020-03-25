@@ -87,8 +87,8 @@ Poisson$set("public","initialize",function(rate = 1, decorators = NULL, verbose 
   private$.parameters <- getParameterSet(self, rate, verbose)
   self$setParameterValue(rate = rate)
 
-  pdf <- function(x1) dpois(x1, self$getParameterValue("rate"))
-  cdf <- function(x1) ppois(x1, self$getParameterValue("rate"))
+  pdf <- function(x1, log = FALSE) dpois(x1, self$getParameterValue("rate"), log = log)
+  cdf <- function(x1, log.p = FALSE) ppois(x1, self$getParameterValue("rate"), log.p = log.p)
   quantile <- function(p) qpois(p, self$getParameterValue("rate"))
   rand <- function(n) rpois(n, self$getParameterValue("rate"))
 

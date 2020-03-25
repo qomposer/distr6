@@ -1,5 +1,7 @@
 # distr6 1.3.5.9000
 
+* Analytical expressions for log-pdf and log-cdf now available and implemented by default, analytical log-quantile not yet available (and may never be). To impute a numerical expression using `log(.$pdf)` use `CoreStatistics` decorator. This could break backward compatibility if trying to call `pdf(log = TRUE)` or `cdf(log.p = TRUE)` when an analytical expression is unavailable and no decorators are used.
+
 # distr6 1.3.5
 
 * Added Erlang distribution

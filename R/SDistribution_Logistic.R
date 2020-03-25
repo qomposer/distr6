@@ -98,8 +98,8 @@ Logistic$set("public","initialize",function(mean = 0, scale = 1, sd = NULL,
   private$.parameters <- getParameterSet(self, mean, scale, sd, verbose)
   self$setParameterValue(mean = mean, scale = scale, sd = sd)
 
-  pdf <- function(x1) dlogis(x1, self$getParameterValue("mean"), self$getParameterValue("scale"))
-  cdf <- function(x1) plogis(x1, self$getParameterValue("mean"), self$getParameterValue("scale"))
+  pdf <- function(x1, log = FALSE) dlogis(x1, self$getParameterValue("mean"), self$getParameterValue("scale"), log = log)
+  cdf <- function(x1, log.p = FALSE) plogis(x1, self$getParameterValue("mean"), self$getParameterValue("scale"), log.p = log.p)
   quantile <- function(p) qlogis(p, self$getParameterValue("mean"), self$getParameterValue("scale"))
   rand <- function(n) rlogis(n, self$getParameterValue("mean"), self$getParameterValue("scale"))
 

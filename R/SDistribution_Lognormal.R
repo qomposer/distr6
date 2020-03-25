@@ -139,8 +139,8 @@ Lognormal$set("public","initialize",function(meanlog = 0, varlog = 1, sdlog = NU
   self$setParameterValue(meanlog = meanlog, varlog = varlog, sdlog = sdlog, preclog = preclog,
                               mean = mean, var = var, sd = sd, prec = prec)
 
-  pdf <- function(x1) dlnorm(x1, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"))
-  cdf <- function(x1) plnorm(x1, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"))
+  pdf <- function(x1, log = FALSE) dlnorm(x1, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"), log = log)
+  cdf <- function(x1, log.p = FALSE) plnorm(x1, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"), log.p = log.p)
   quantile <- function(p) qlnorm(p, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"))
   rand <- function(n) rlnorm(n, self$getParameterValue("meanlog"), self$getParameterValue("sdlog"))
 

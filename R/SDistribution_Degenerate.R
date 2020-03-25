@@ -90,8 +90,16 @@ Degenerate$set("public","initialize",function(mean = 0, decorators = NULL, verbo
   private$.parameters <- getParameterSet(self, mean, verbose)
   self$setParameterValue(mean = mean)
 
-  pdf <- function(x1) if(x1 == self$getParameterValue("mean")) return(1) else return(0)
-  cdf <- function(x1) if(x1 >= self$getParameterValue("mean")) return(1) else return(0)
+  pdf <- function(x1, log = FALSE){
+    ret = if(x1 == self$getParameterValue("mean")) 1 else 0
+    if(log) ret = log(ret)
+    return(ret)
+  }
+  cdf <- function(x1, log.p = FALSE){
+    ret = if(x1 >= self$getParameterValue("mean")) 1 else 0
+    if(log.p) ret = log(ret)
+    return(ret)
+  }
   quantile <- function(p) if(p > 0) return(self$getParameterValue("mean")) else return(-Inf)
   rand <- function(n) return(rep(self$getParameterValue("mean"), n))
 

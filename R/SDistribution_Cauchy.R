@@ -90,8 +90,8 @@ Cauchy$set("public","initialize",function(location = 0, scale = 1,
   private$.parameters <- getParameterSet(self, location, scale, verbose)
   self$setParameterValue(location = location, scale = scale)
 
-  pdf <- function(x1) dcauchy(x1, self$getParameterValue("location"), self$getParameterValue("scale"))
-  cdf <- function(x1) pcauchy(x1, self$getParameterValue("location"), self$getParameterValue("scale"))
+  pdf <- function(x1, log = FALSE) dcauchy(x1, self$getParameterValue("location"), self$getParameterValue("scale"), log = log)
+  cdf <- function(x1, log.p = FALSE) pcauchy(x1, self$getParameterValue("location"), self$getParameterValue("scale"), log.p = log.p)
   quantile <- function(p) qcauchy(p, self$getParameterValue("location"), self$getParameterValue("scale"))
   rand <- function(n) rcauchy(n, self$getParameterValue("location"), self$getParameterValue("scale"))
 

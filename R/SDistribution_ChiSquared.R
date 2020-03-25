@@ -105,8 +105,8 @@ ChiSquared$set("public","initialize",function(df = 1, decorators = NULL, verbose
   private$.parameters <- getParameterSet(self, df, verbose)
   self$setParameterValue(df = df)
 
-  pdf <- function(x1) dchisq(x1, self$getParameterValue("df"))
-  cdf <- function(x1) pchisq(x1, self$getParameterValue("df"))
+  pdf <- function(x1, log = FALSE) dchisq(x1, self$getParameterValue("df"), log = log)
+  cdf <- function(x1, log.p = FALSE) pchisq(x1, self$getParameterValue("df"), log.p = log.p)
   quantile <- function(p) qchisq(p, self$getParameterValue("df"))
   rand <- function(n) rchisq(n, self$getParameterValue("df"))
 

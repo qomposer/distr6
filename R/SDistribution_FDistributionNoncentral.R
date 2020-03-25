@@ -92,8 +92,8 @@ FDistributionNoncentral$set("public", "initialize", function(df1 = 1, df2 = 1, l
   private$.parameters <- getParameterSet(self, df1, df2, location, verbose)
   self$setParameterValue(df1 = df1, df2 = df2, location = location)
 
-  pdf <- function(x1) df(x1, df1, df2, location)
-  cdf <- function(x1) pf(x1, df1, df2, location)
+  pdf <- function(x1, log = FALSE) df(x1, df1, df2, location, log = log)
+  cdf <- function(x1, log.p = FALSE) pf(x1, df1, df2, location, log.p = log.p)
   quantile <- function(p) qf(p, df1, df2, location)
   rand <- function(n) rf(n, df1, df2, location)
 

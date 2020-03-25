@@ -95,8 +95,8 @@ Exponential$set("public","initialize",function(rate = 1, scale = NULL, decorator
   private$.parameters <- getParameterSet(self, rate, scale, verbose)
   self$setParameterValue(rate = rate, scale = scale)
 
-  pdf <- function(x1) dexp(x1, self$getParameterValue("rate"))
-  cdf <- function(x1) pexp(x1, self$getParameterValue("rate"))
+  pdf <- function(x1, log = FALSE) dexp(x1, self$getParameterValue("rate"), log = log)
+  cdf <- function(x1, log.p = FALSE) pexp(x1, self$getParameterValue("rate"), log.p = log.p)
   quantile <- function(p) qexp(p, self$getParameterValue("rate"))
   rand <- function(n) rexp(n, self$getParameterValue("rate"))
 

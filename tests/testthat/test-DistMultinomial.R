@@ -50,7 +50,7 @@ test_that("statistics",{
   expect_error(mn$mode())
   expect_equal(mn$pdf(1,5,7), 0)
   expect_error(mn$pdf(1,7))
-  expect_error(mn$pdf(1,7,8,9))
+  expect_error(mn$pdf(1,7,8,9), "Assertion on")
   expect_silent(mn$pdf(c(1,2),c(8,7),c(1,2)))
   expect_error(mn$pdf(c(1,2),c(8,7),c(1)))
   expect_equal(mn$pdf(1,1,1), dmultinom(x = c(1,1,1), prob = probs))

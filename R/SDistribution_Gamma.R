@@ -114,8 +114,8 @@ Gamma$set("public","initialize",function(shape = 1,rate = 1, scale = NULL, mean 
   private$.parameters <- getParameterSet.Gamma(self, shape, rate, scale, mean, verbose)
   self$setParameterValue(shape = shape, rate = rate, scale = scale, mean = mean)
 
-  pdf <- function(x1) dgamma(x1, self$getParameterValue("shape"),self$getParameterValue('rate'))
-  cdf <- function(x1) pgamma(x1, self$getParameterValue("shape"),self$getParameterValue('rate'))
+  pdf <- function(x1, log = FALSE) dgamma(x1, self$getParameterValue("shape"),self$getParameterValue('rate'), log = log)
+  cdf <- function(x1, log.p = FALSE) pgamma(x1, self$getParameterValue("shape"),self$getParameterValue('rate'), log.p = log.p)
   quantile <- function(p) qgamma(p, self$getParameterValue("shape"),self$getParameterValue('rate'))
   rand <- function(n) rgamma(n, self$getParameterValue("shape"),self$getParameterValue('rate'))
 

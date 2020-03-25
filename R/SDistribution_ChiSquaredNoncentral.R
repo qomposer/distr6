@@ -108,8 +108,8 @@ ChiSquaredNoncentral$set("public","initialize",function(df = 1, location = 0, de
   private$.parameters <- getParameterSet(self, df, location, verbose)
   self$setParameterValue(df = df, location = location)
 
-  pdf <- function(x1) dchisq(x1, self$getParameterValue("df"), self$getParameterValue("location"))
-  cdf <- function(x1) pchisq(x1, self$getParameterValue("df"), self$getParameterValue("location"))
+  pdf <- function(x1, log = FALSE) dchisq(x1, self$getParameterValue("df"), self$getParameterValue("location"), log = log)
+  cdf <- function(x1, log.p = FALSE) pchisq(x1, self$getParameterValue("df"), self$getParameterValue("location"), log.p = log.p)
   quantile <- function(p) qchisq(p, self$getParameterValue("df"), self$getParameterValue("location"))
   rand <- function(n) rchisq(n, self$getParameterValue("df"), self$getParameterValue("location"))
 

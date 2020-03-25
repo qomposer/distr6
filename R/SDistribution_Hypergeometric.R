@@ -128,12 +128,14 @@ Hypergeometric$set("public","initialize",function(size = 50, successes = 5, fail
     private$.parameters <- getParameterSet(self, size, successes, failures, draws, verbose)
     self$setParameterValue(size = size, successes=successes, failures = failures, draws = draws)
 
-    pdf = function(x1) dhyper(x1, self$getParameterValue("successes"),
+    pdf = function(x1, log = FALSE) dhyper(x1, self$getParameterValue("successes"),
                               self$getParameterValue("failures"),
-                              self$getParameterValue("draws"))
-    cdf = function(x1) phyper(x1, self$getParameterValue("successes"),
+                              self$getParameterValue("draws"),
+                              log = log)
+    cdf = function(x1, log.p = FALSE) phyper(x1, self$getParameterValue("successes"),
                               self$getParameterValue("failures"),
-                              self$getParameterValue("draws"))
+                              self$getParameterValue("draws"),
+                              log.p = log.p)
     quantile = function(p) qhyper(p, self$getParameterValue("successes"),
                                   self$getParameterValue("failures"),
                                   self$getParameterValue("draws"))

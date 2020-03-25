@@ -216,10 +216,15 @@ Distribution$set("public","initialize",function(name = NULL, short_name = NULL,
     # pdf and cdf Checks
     #-------------------
     if(!is.null(pdf)){
-      if(!is.null(formals(pdf)$self))
+      if(!is.null(formals(pdf)$self)){
         formals(pdf)$self = self
-      else
+      } else {
         formals(pdf) = c(formals(pdf),list(self=self),alist(...=))
+      }
+
+      if("log" %in% names(formals(pdf))){
+        private$.log = TRUE
+      }
     }
 
     if(!is.null(cdf)){
@@ -268,6 +273,9 @@ Distribution$set("public","initialize",function(name = NULL, short_name = NULL,
   if(!is.null(pdf)){
       private$.pdf <- pdf
       private$.isPdf <- TRUE
+      if("log" %in% names(formals(pdf))){
+        private$.log = TRUE
+      }
     }
   if(!is.null(cdf)){
       private$.cdf <- cdf
@@ -546,13 +554,20 @@ Distribution$set("public","pdf",function(x1, ..., log = FALSE, simplify = TRUE){
 
   if(testUnivariate(self)){
     pdf = numeric(length(x1))
-    if(any(self$liesInSupport(x1, all = F)))
-      pdf[self$liesInSupport(x1, all = F)] = private$.pdf(x1[self$liesInSupport(x1, all = F)])
+    if(any(self$liesInSupport(x1, all = F))){
+      if(log & private$.log){
+        pdf[self$liesInSupport(x1, all = F)] = private$.pdf(x1[self$liesInSupport(x1, all = F)], log = TRUE)
+      } else if (log & !private$.log & "CoreStatistics" %in% self$decorators) {
+        pdf[self$liesInSupport(x1, all = F)] = log(private$.pdf(x1[self$liesInSupport(x1, all = F)]))
+      } else if(log){
+        stop("No analytical expression for log-pdf available. Either use log(.$pdf) or impute this automatically with CoreStatistics decorator.")
+      } else if(!log){
+        pdf[self$liesInSupport(x1, all = F)] = private$.pdf(x1[self$liesInSupport(x1, all = F)])
+      }
+    }
   } else {
     pdf = private$.pdf(x1, ...)
   }
-
-  if(log) pdf <- log(pdf)
 
   if(inherits(pdf,"data.table"))
     return(pdf)
@@ -611,26 +626,32 @@ Distribution$set("public","cdf",function(x1, ..., lower.tail = TRUE, log.p = FAL
     return(NULL)
 
   if(testUnivariate(self)){
-    if(self$type$class == "integer")
-       x1 <- floor(x1)
-    cdf = numeric(length(x1))
-    cdf[x1 >= self$sup] = 1
+    if(self$type$class == "integer")  x1 <- floor(x1)
 
-    if(getR6Class(self) %in% c("Empirical","WeightedDiscrete")){
-      if(any(x1 >= self$inf & x1 <= self$sup))
-        cdf[x1 >= self$inf & x1 <= self$sup] = private$.cdf(x1[x1 >= self$inf & x1 <= self$sup])
+    if(!log.p){
+      cdf = numeric(length(x1))
+      cdf[x1 >= self$sup] = 1
     } else {
-      if(any(self$liesInSupport(x1, all = F)))
+      cdf = rep(-Inf, length(x1))
+      cdf[x1 >= self$sup] = 0
+    }
+
+    if(any(self$liesInSupport(x1, all = F))){
+      if(log.p & private$.log){
+        cdf[self$liesInSupport(x1, all = F)] = private$.cdf(x1[self$liesInSupport(x1, all = F)], log.p = TRUE)
+      } else if (log.p & !private$.log & "CoreStatistics" %in% self$decorators) {
+        cdf[self$liesInSupport(x1, all = F)] = log(private$.cdf(x1[self$liesInSupport(x1, all = F)]))
+      } else if(log.p){
+        stop("No analytical expression for log-cdf available. Either use log(.$cdf) or impute this automatically with CoreStatistics decorator.")
+      } else if(!log.p){
         cdf[self$liesInSupport(x1, all = F)] = private$.cdf(x1[self$liesInSupport(x1, all = F)])
+      }
     }
   } else {
       cdf = private$.cdf(x1, ...)
   }
 
-  if(log.p & lower.tail) cdf = log(cdf)
-  else if(log.p & !lower.tail) cdf = log(1 - cdf)
-  else if(!log.p & lower.tail) cdf = cdf
-  else cdf = 1 - cdf
+  if(!lower.tail) cdf = 1 - cdf
 
   if(inherits(cdf,"data.table"))
     return(cdf)
@@ -1221,6 +1242,7 @@ Distribution$set("private",".isPdf", FALSE)
 Distribution$set("private",".isCdf", FALSE)
 Distribution$set("private",".isQuantile", FALSE)
 Distribution$set("private",".isRand", FALSE)
+Distribution$set("private",".log", FALSE)
 
 #-------------------------------------------------------------
 # Distribution Private Methods

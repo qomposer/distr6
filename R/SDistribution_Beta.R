@@ -107,8 +107,8 @@ Beta$set("public", "initialize", function(shape1 = 1, shape2 = 1, decorators = N
   private$.parameters <- getParameterSet.Beta(self, shape1, shape2, verbose)
   self$setParameterValue(shape1=shape1,shape2=shape2)
 
-  pdf <- function(x1) dbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"))
-  cdf <- function(x1) pbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"))
+  pdf <- function(x1, log = FALSE) dbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), log = log)
+  cdf <- function(x1, log.p = FALSE) pbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), log.p = log.p)
   quantile <- function(p) qbeta(p, self$getParameterValue("shape1"), self$getParameterValue("shape2"))
   rand <- function(n) rbeta(n, self$getParameterValue("shape1"), self$getParameterValue("shape2"))
 

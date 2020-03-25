@@ -78,8 +78,8 @@ StudentTNoncentral$set("public","initialize",function(df = 1, location = 0, deco
   private$.parameters <- getParameterSet(self, df, location, verbose)
   self$setParameterValue(df = df, location = location)
 
-  pdf <- function(x1) dt(x1, self$getParameterValue("df"), self$getParameterValue("location"))
-  cdf <- function(x1) pt(x1, self$getParameterValue("df"), self$getParameterValue("location"))
+  pdf <- function(x1, log = FALSE) dt(x1, self$getParameterValue("df"), self$getParameterValue("location"), log = log)
+  cdf <- function(x1, log.p = FALSE) pt(x1, self$getParameterValue("df"), self$getParameterValue("location"), log.p = log.p)
   quantile <- function(p) qt(p, self$getParameterValue("df"), self$getParameterValue("location"))
   rand <- function(n) rt(n, self$getParameterValue("df"), self$getParameterValue("location"))
 

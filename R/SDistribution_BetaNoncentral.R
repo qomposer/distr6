@@ -59,8 +59,8 @@ BetaNoncentral$set("public", "initialize", function(shape1 = 1, shape2 = 1, loca
   private$.parameters <- getParameterSet.BetaNoncentral(self, shape1, shape2, locaiton, verbose)
   self$setParameterValue(shape1=shape1,shape2=shape2, location = location)
 
-  pdf <- function(x1) dbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"))
-  cdf <- function(x1) pbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"))
+  pdf <- function(x1, log = FALSE) dbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"), log = log)
+  cdf <- function(x1, log.p = FALSE) pbeta(x1, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"), log.p = log.p)
   quantile <- function(p) qbeta(p, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"))
   rand <- function(n) rbeta(n, self$getParameterValue("shape1"), self$getParameterValue("shape2"), self$getParameterValue("location"))
 

@@ -109,8 +109,8 @@ Bernoulli$set("public","initialize",function(prob = 0.5, qprob = NULL, decorator
   if(!is.null(qprob)) prob <- NULL
   self$setParameterValue(prob = prob, qprob = qprob)
 
-  pdf = function(x1) dbinom(x1, 1, self$getParameterValue("prob"))
-  cdf = function(x1) pbinom(x1, 1, self$getParameterValue("prob"))
+  pdf = function(x1, log = FALSE) dbinom(x1, 1, self$getParameterValue("prob"), log = log)
+  cdf = function(x1, log.p = FALSE) pbinom(x1, 1, self$getParameterValue("prob"), log.p = log.p)
   quantile = function(p) qbinom(p, 1, self$getParameterValue("prob"))
   rand = function(n) rbinom(n, 1, self$getParameterValue("prob"))
 

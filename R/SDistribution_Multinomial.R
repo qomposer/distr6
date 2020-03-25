@@ -125,8 +125,10 @@ Multinomial$set("public","initialize",function(size = 10, probs = c(0.5, 0.5), d
 
   lst <- rep(list(bquote()), length(probs))
   names(lst) <- paste("x",1:length(probs),sep="")
+  lst <- c(lst, list(log = FALSE))
 
   pdf <- function(){
+    checkmate::assertFlag(log)
 
     call = mget(paste0("x",1:self$getParameterValue("K")))
 
@@ -138,10 +140,11 @@ Multinomial$set("public","initialize",function(size = 10, probs = c(0.5, 0.5), d
 
     x = do.call(cbind,mget(paste0("x",1:self$getParameterValue("K"))))
     z = apply(x, 1, function(y){
-      if(sum(y) != self$getParameterValue("size"))
-        return(0)
-      else
-        return(dmultinom(y, self$getParameterValue("size"), self$getParameterValue("probs")))
+      if (sum(y) != self$getParameterValue("size")) {
+        if(log) return(-Inf) else return(0)
+      } else {
+        return(dmultinom(y, self$getParameterValue("size"), self$getParameterValue("probs"), log = log))
+      }
     })
 
     return(z)

@@ -102,8 +102,8 @@ Normal$set("public","initialize",function(mean = 0, var = 1, sd = NULL, prec = N
   private$.parameters <- getParameterSet(self, mean, var, sd, prec, verbose)
   self$setParameterValue(mean = mean, var = var, sd = sd, prec = prec)
 
-  pdf <- function(x1) dnorm(x1, self$getParameterValue("mean"), self$getParameterValue("sd"))
-  cdf <- function(x1) pnorm(x1, self$getParameterValue("mean"), self$getParameterValue("sd"))
+  pdf <- function(x1, log = FALSE) dnorm(x1, self$getParameterValue("mean"), self$getParameterValue("sd"), log = log)
+  cdf <- function(x1, log.p = FALSE) pnorm(x1, self$getParameterValue("mean"), self$getParameterValue("sd"), log.p = log.p)
   quantile <- function(p) qnorm(p, self$getParameterValue("mean"), self$getParameterValue("sd"))
   rand <- function(n) rnorm(n, self$getParameterValue("mean"), self$getParameterValue("sd"))
 

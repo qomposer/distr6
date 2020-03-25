@@ -119,8 +119,8 @@ Weibull$set("public","initialize",function(shape = 1, scale = 1, altscale = NULL
   private$.parameters <- getParameterSet(self, shape, scale, altscale, verbose)
   self$setParameterValue(shape = shape, scale = scale, altscale = altscale)
 
-  pdf <- function(x1) dweibull(x1, self$getParameterValue("shape"), self$getParameterValue("scale"))
-  cdf <- function(x1) pweibull(x1, self$getParameterValue("shape"), self$getParameterValue("scale"))
+  pdf <- function(x1, log = FALSE) dweibull(x1, self$getParameterValue("shape"), self$getParameterValue("scale"), log = log)
+  cdf <- function(x1, log.p = FALSE) pweibull(x1, self$getParameterValue("shape"), self$getParameterValue("scale"), log.p = log.p)
   quantile <- function(p) qweibull(p, self$getParameterValue("shape"), self$getParameterValue("scale"))
   rand <- function(n) rweibull(n, self$getParameterValue("shape"), self$getParameterValue("scale"))
 

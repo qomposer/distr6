@@ -113,8 +113,8 @@ InverseGamma$set("public","initialize",function(shape = 1,scale = 1, decorators 
   private$.parameters <- getParameterSet.InverseGamma(self, shape, scale, verbose)
   self$setParameterValue(shape=shape, scale = scale)
 
-  pdf <- function(x1) extraDistr::dinvgamma(x1, self$getParameterValue("shape"), self$getParameterValue("scale"))
-  cdf <- function(x1) extraDistr::pinvgamma(x1, self$getParameterValue("shape"), self$getParameterValue("scale"))
+  pdf <- function(x1, log = FALSE) extraDistr::dinvgamma(x1, self$getParameterValue("shape"), self$getParameterValue("scale"), log = log)
+  cdf <- function(x1, log.p = FALSE) extraDistr::pinvgamma(x1, self$getParameterValue("shape"), self$getParameterValue("scale"), log.p = log.p)
   quantile <- function(p) extraDistr::qinvgamma(p, self$getParameterValue("shape"), self$getParameterValue("scale"))
   rand <- function(n) extraDistr::rinvgamma(n, self$getParameterValue("shape"), self$getParameterValue("scale"))
 

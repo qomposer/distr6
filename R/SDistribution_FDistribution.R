@@ -129,8 +129,8 @@ FDistribution$set("public", "initialize", function(df1 = 1, df2 = 1, decorators 
   private$.parameters <- getParameterSet(self, df1, df2, verbose)
   self$setParameterValue(df1 = df1, df2 = df2)
 
-  pdf <- function(x1) df(x1, df1, df2)
-  cdf <- function(x1) pf(x1, df1, df2)
+  pdf <- function(x1, log = FALSE) df(x1, df1, df2, log = log)
+  cdf <- function(x1, log.p = FALSE) pf(x1, df1, df2, log.p = log.p)
   quantile <- function(p) qf(p, df1, df2)
   rand <- function(n) rf(n, df1, df2)
 

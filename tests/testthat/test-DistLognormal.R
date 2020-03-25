@@ -61,7 +61,7 @@ test_that("statistics",{
   expect_error(ln$cf(1))
   expect_equal(ln$mode(), exp(-1))
   expect_equal(ln$pdf(2:6), dlnorm(2:6))
-  expect_equal(ln$cdf(2, log.p = T, lower.tail = F), plnorm(2, log.p = T, lower.tail = F))
+  expect_equal(ln$cdf(2, log.p = T), plnorm(2, log.p = T))
   expect_equal(ln$quantile(0.46), qlnorm(0.46))
   expect_equal(length(ln$rand(10)),10)
 })
